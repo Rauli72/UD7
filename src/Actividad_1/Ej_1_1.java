@@ -16,7 +16,6 @@ public class Ej_1_1 {
         // Contactos NO añadidos
         Contacto c5 = Contacto.crearContacto("Óscar", "414141411");
 
-        TelefonoMovil tm = new TelefonoMovil("741455157");
         tm.anadirNuevoContacto(c1);
         tm.anadirNuevoContacto(c2);
         tm.anadirNuevoContacto(c3);
@@ -26,6 +25,7 @@ public class Ej_1_1 {
         Scanner sc = new Scanner(System.in);
         boolean salir = false;
 
+        TelefonoMovil tm = new TelefonoMovil("741455157");
         mostrarMenu();
 
         while (!salir) {
