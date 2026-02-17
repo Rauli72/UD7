@@ -30,6 +30,9 @@ public class Ej_1_2 {
         albumes.getLast().addToPlaylist("Thriller", playlist);
         albumes.getLast().addToPlaylist("Beat It", playlist);
 
+        // MASTERIZACIÓN
+        //Collections.sort(playlist);
+        
         // INICIAR TOD0
         play(playlist);
     }
@@ -37,6 +40,7 @@ public class Ej_1_2 {
     public static void play(LinkedList<Cancion> playlist) {
         Scanner sc = new Scanner(System.in);
         boolean salir = false;
+        int contador = 0;
         boolean continuar = true; /* Se crea para que cuando le das a opciones como anterior
                                      canción, porque si no te saldría la misma que ya está
                                      reproduciéndose*/
@@ -75,6 +79,7 @@ public class Ej_1_2 {
 
                         if (it.hasNext()) {
                             System.out.println("Reproduciendo: " + it.next());
+                            contador++;
                         } else {
                             System.out.println("Fin de la playlist...");
                         }
@@ -90,6 +95,7 @@ public class Ej_1_2 {
 
                         if (it.hasPrevious()) {
                             System.out.println("Reproduciendo: " + it.previous());
+                            contador--;
                         } else {
                             System.out.println("Inicio de la playlist...");
                         }
@@ -118,6 +124,27 @@ public class Ej_1_2 {
                         break;
 
                     case 6: // Eliminar canciones
+                        if (playlist.isEmpty()) {
+                            System.out.println("La playlist está vacía.");
+                            break;
+                        }
+
+                        it.remove(); // elimina la canción actual
+
+                        if (it.hasNext()) {
+                            System.out.println("Reproduciendo: " + it.next());
+                            continuar = true;
+
+                        } else if (it.hasPrevious()) {
+                            System.out.println("Reproduciendo: " + it.previous());
+                            continuar = false;
+
+                        } else {
+                            System.out.println("La playlist quedó vacía.");
+                            salir = true;
+                        }
+                        break;
+
 
 
                     default:
