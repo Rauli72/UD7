@@ -12,14 +12,16 @@ public class Ej_1_2 {
         aNightAtTheOpera.addCancion("Bohemian Rhapsody", 5.55);
         aNightAtTheOpera.addCancion("Love of My Life", 3.38);
         aNightAtTheOpera.addCancion("You're My Best Friend", 2.52);
+        aNightAtTheOpera.addCancion("Death on Two Legs", 3.43); // NUEVA
         albumes.add(aNightAtTheOpera);
 
 
-        // Álbum 2
+        // Álbum 2 - Thriller
         Album thriller = new Album("Thriller", "Michael Jackson");
         thriller.addCancion("Thriller", 5.57);
         thriller.addCancion("Billie Jean", 4.54);
         thriller.addCancion("Beat It", 4.18);
+        thriller.addCancion("Smooth Criminal", 4.17); // NUEVA
         albumes.add(thriller);
 
 
@@ -29,6 +31,8 @@ public class Ej_1_2 {
 
         albumes.getLast().addToPlaylist("Thriller", playlist);
         albumes.getLast().addToPlaylist("Beat It", playlist);
+        albumes.getLast().addToPlaylist("Smooth Criminal", playlist);
+
 
         // MASTERIZACIÓN
         //Collections.sort(playlist);
@@ -98,17 +102,20 @@ public class Ej_1_2 {
                         }
                         break;
 
-                    case 3:
+                    case 3: // Repetir canción actual
+
                         if (continuar) {
                             if (it.hasPrevious()) {
-                                System.out.println("Repitiendo: " + it.previous());
+                                Cancion actual = it.previous();
+                                System.out.println("Repitiendo: " + actual);
+                                it.next(); // volver a dejar el cursor donde estaba
                             }
-                            continuar = false;
                         } else {
                             if (it.hasNext()) {
-                                System.out.println("Repitiendo: " + it.previous());
+                                Cancion actual = it.next();
+                                System.out.println("Repitiendo: " + actual);
+                                it.previous(); // restaurar posición
                             }
-                            continuar = true;
                         }
                         break;
 
