@@ -40,7 +40,6 @@ public class Ej_1_2 {
     public static void play(LinkedList<Cancion> playlist) {
         Scanner sc = new Scanner(System.in);
         boolean salir = false;
-        int contador = 0;
         boolean continuar = true; /* Se crea para que cuando le das a opciones como anterior
                                      canción, porque si no te saldría la misma que ya está
                                      reproduciéndose*/
@@ -79,7 +78,6 @@ public class Ej_1_2 {
 
                         if (it.hasNext()) {
                             System.out.println("Reproduciendo: " + it.next());
-                            contador++;
                         } else {
                             System.out.println("Fin de la playlist...");
                         }
@@ -95,7 +93,6 @@ public class Ej_1_2 {
 
                         if (it.hasPrevious()) {
                             System.out.println("Reproduciendo: " + it.previous());
-                            contador--;
                         } else {
                             System.out.println("Inicio de la playlist...");
                         }
