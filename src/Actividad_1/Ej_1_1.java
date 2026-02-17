@@ -1,6 +1,7 @@
 package Actividad_1;
 
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Ej_1_1 {
@@ -29,95 +30,99 @@ public class Ej_1_1 {
         mostrarMenu();
 
         while (!salir) {
-            System.out.print("\nElige una opción: ");
-            int opcion = sc.nextInt();
-            sc.nextLine(); // limpiar buffer
+            try {
+                System.out.print("\nElige una opción: ");
+                int opcion = sc.nextInt();
+                sc.nextLine(); // limpiar buffer
 
-            switch (opcion) {
+                switch (opcion) {
 
-                case 0:
-                    salir = true;
-                    System.out.println("Saliendo del programa...");
-                    break;
-
-                case 1:
-                    tm.printContactos();
-                    break;
-
-                case 2:
-                    System.out.print("Nombre: ");
-                    String nombre = sc.nextLine();
-                    System.out.print("Teléfono: ");
-                    String telefono = sc.nextLine();
-
-                    Contacto nuevo = Contacto.crearContacto(nombre, telefono);
-
-                    if (tm.anadirNuevoContacto(nuevo)) {
-                        System.out.println("Contacto añadido correctamente.");
-                    } else {
-                        System.out.println("El contacto ya existe.");
-                    }
-                    break;
-
-                case 3:
-                    System.out.print("Nombre del contacto a actualizar: ");
-                    String nombreViejo = sc.nextLine();
-                    Contacto viejo = tm.queryContacto(nombreViejo);
-
-                    if (viejo == null) {
-                        System.out.println("El contacto no existe.");
+                    case 0:
+                        salir = true;
+                        System.out.println("Saliendo del programa...");
                         break;
-                    }
 
-                    System.out.print("Nuevo nombre: ");
-                    String nombreNuevo = sc.nextLine();
-                    System.out.print("Nuevo teléfono: ");
-                    String telefonoNuevo = sc.nextLine();
+                    case 1:
+                        tm.printContactos();
+                        break;
 
-                    Contacto actualizado = Contacto.crearContacto(nombreNuevo, telefonoNuevo);
+                    case 2:
+                        System.out.print("Nombre: ");
+                        String nombre = sc.nextLine();
+                        System.out.print("Teléfono: ");
+                        String telefono = sc.nextLine();
 
-                    if (tm.updateContacto(actualizado, viejo)) {
-                        System.out.println("Contacto actualizado correctamente.");
-                    } else {
-                        System.out.println("No se pudo actualizar el contacto.");
-                    }
-                    break;
+                        Contacto nuevo = Contacto.crearContacto(nombre, telefono);
 
-                case 4:
-                    System.out.print("Nombre del contacto a eliminar: ");
-                    String nombreEliminar = sc.nextLine();
-                    Contacto eliminar = tm.queryContacto(nombreEliminar);
+                        if (tm.anadirNuevoContacto(nuevo)) {
+                            System.out.println("Contacto añadido correctamente.");
+                        } else {
+                            System.out.println("El contacto ya existe.");
+                        }
+                        break;
 
-                    if (eliminar == null) {
-                        System.out.println("El contacto no existe.");
-                    } else {
-                        tm.eliminarContacto(eliminar);
-                        System.out.println("Contacto eliminado correctamente.");
-                    }
-                    break;
+                    case 3:
+                        System.out.print("Nombre del contacto a actualizar: ");
+                        String nombreViejo = sc.nextLine();
+                        Contacto viejo = tm.queryContacto(nombreViejo);
 
-                case 5:
-                    System.out.print("Nombre del contacto a buscar: ");
-                    String nombreBuscar = sc.nextLine();
-                    Contacto encontrado = tm.queryContacto(nombreBuscar);
+                        if (viejo == null) {
+                            System.out.println("El contacto no existe.");
+                            break;
+                        }
 
-                    if (encontrado == null) {
-                        System.out.println("Contacto no encontrado.");
-                    } else {
-                        System.out.println(encontrado);
-                    }
-                    break;
+                        System.out.print("Nuevo nombre: ");
+                        String nombreNuevo = sc.nextLine();
+                        System.out.print("Nuevo teléfono: ");
+                        String telefonoNuevo = sc.nextLine();
 
-                case 6:
-                    mostrarMenu();
-                    break;
+                        Contacto actualizado = Contacto.crearContacto(nombreNuevo, telefonoNuevo);
 
-                default:
-                    System.out.println("Opción no válida.");
+                        if (tm.updateContacto(actualizado, viejo)) {
+                            System.out.println("Contacto actualizado correctamente.");
+                        } else {
+                            System.out.println("No se pudo actualizar el contacto.");
+                        }
+                        break;
+
+                    case 4:
+                        System.out.print("Nombre del contacto a eliminar: ");
+                        String nombreEliminar = sc.nextLine();
+                        Contacto eliminar = tm.queryContacto(nombreEliminar);
+
+                        if (eliminar == null) {
+                            System.out.println("El contacto no existe.");
+                        } else {
+                            tm.eliminarContacto(eliminar);
+                            System.out.println("Contacto eliminado correctamente.");
+                        }
+                        break;
+
+                    case 5:
+                        System.out.print("Nombre del contacto a buscar: ");
+                        String nombreBuscar = sc.nextLine();
+                        Contacto encontrado = tm.queryContacto(nombreBuscar);
+
+                        if (encontrado == null) {
+                            System.out.println("Contacto no encontrado.");
+                        } else {
+                            System.out.println(encontrado);
+                        }
+                        break;
+
+                    case 6:
+                        mostrarMenu();
+                        break;
+
+                    default:
+                        System.out.println("Opción no válida.");
+                }
+
+            } catch (InputMismatchException e) {
+                System.out.println("No has introducido un número válido.");
+                sc.nextLine(); // IMPORTANTE PARA LIMPIAR EL BUFFER DEL TRY-CATCH
             }
         }
-
-        sc.close();
     }
 
     private static void mostrarMenu() {
